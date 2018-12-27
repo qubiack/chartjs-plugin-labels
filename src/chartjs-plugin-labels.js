@@ -133,7 +133,11 @@
       for (var i = 0; i < lines.length; i++) {
         var y = position.y - this.options.fontSize / 2 * lines.length + this.options.fontSize * i;
         if(this.chart.config.type === 'horizontalBar') {
-          ctx.fillText(lines[i], position.x + (ctx.measureText(lines[i]).width / 2) + this.options.textMargin, y);
+          var specPos = (position.x + (ctx.measureText(lines[i]).width / 2)) * 0.8 + this.options.textMargin;
+          if (localStorage.getItem('vm-base') && parseInt(localStorage.getItem('vm-base'), 10) + (ctx.measureText(lines[i]).width / 2) + this.options.textMargin > specPos) {
+            specPos = parseInt(localStorage.getItem('vm-base'), 10) + (ctx.measureText(lines[i]).width / 2) + this.options.textMargin;
+          }
+          ctx.fillText(lines[i], specPos, y);
         } else {
           ctx.fillText(lines[i], position.x, y);
         }
