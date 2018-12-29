@@ -138,6 +138,12 @@
             specPos = parseInt(localStorage.getItem('vm-base'), 10) + (ctx.measureText(lines[i]).width / 2) + this.options.textMargin;
           }
           ctx.fillText(lines[i], specPos, y);
+        } else if (this.chart.config.type === 'bar' && this.options.stacked){
+          if (lines[i] > 0) {
+            ctx.fillText(lines[i], position.x, (y + this.options.fontSize + 4));
+          } else {
+            ctx.fillText(Math.abs(lines[i]), position.x, y);
+          }
         } else {
           ctx.fillText(lines[i], position.x, y);
         }
